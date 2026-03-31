@@ -1,0 +1,1 @@
+A smart power tap or theif detection system, the system is smart enough to know when someone is connected to you light, when someone is stealing or using your light, this system is good for people that use prepaid meter
