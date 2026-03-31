@@ -137,13 +137,23 @@ async function hardwareData(req, res) {
 
     // 6. Optional: Add to history if an AI prediction or alert is sent
     if (aiPrediction !== undefined) {
-      const historyEntry = {
-        timestamp: new Date(),
-        title: "Soil Analysis Update",
-        description: `New AI Prediction score: ${aiPrediction}`,
-        aiPrediction: aiPrediction,
-      };
 
+      // Define the recommendation based on the prediction code
+    const statusMap = {
+      0: "Water",
+      1: "Fertilizer",
+      2: "Balanced (Normal)"
+    };
+
+  const recommendation = statusMap[aiPrediction] || "Unknown Status";
+
+    const historyEntry = {
+      timestamp: new Date(),
+      title: "Soil Analysis Update",
+      description: `New AI Prediction score: ${aiPrediction}. Plant needs: ${recommendation}.`,
+      aiPrediction: aiPrediction,
+    };
+         
       // Initialize $push for history if it wasn't already set
       updateQuery.$push.history = {
         $each: [historyEntry],
